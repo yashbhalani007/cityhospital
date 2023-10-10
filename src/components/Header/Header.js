@@ -4,6 +4,8 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 function Header({ cartValue }) {
 
@@ -62,7 +64,12 @@ function Header({ cartValue }) {
                         <IconButton aria-label="cart" >
                             <StyledBadge badgeContent={cartValue} color="warning">
                                 <ShoppingCartIcon />
-                            </StyledBadge>
+                          </StyledBadge>
+                        </IconButton>
+                        <IconButton aria-label="cart" >
+                            <StyledBadge badgeContent={cartValue} color="warning">
+                                <FavoriteIcon />
+                          </StyledBadge>
                         </IconButton>
                     </div>
 

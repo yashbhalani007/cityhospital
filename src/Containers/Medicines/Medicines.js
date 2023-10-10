@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../../components/UI/Card/Card';
 import { Link } from 'react-router-dom';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 
@@ -39,10 +41,13 @@ function Medicines({ CartIncDec }) {
 
                             <Link to={"/Medicine_Details/" + v.id}>
                                 <Card
+                                    favouriteval='aa'
                                     name={v.name}
                                     price={v.price}
                                     btnvalue={'Add to cart'}
                                     btnClick={HandleAddtocart}
+                                    Emptybtw={FavoriteBorderIcon}
+                                    fillBtw={FavoriteIcon}
                                 />
                             </Link>
 
