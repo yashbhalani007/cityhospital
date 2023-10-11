@@ -26,6 +26,7 @@ function MedicinesForm({onHandleFormSubmit, onUpdate}) {
     let MedicineSchema = yup.object().shape({
         name: yup.string().required("please enter name"),
         price: yup.number().required("please enter Price"),
+        img: yup.mixed().required("please enter image"),
         date: yup.date().required("please enter date").min(nd, "Please choose future date"),
         description: yup.string().required("please enter message").min(2).max(100)
     });
@@ -34,6 +35,7 @@ function MedicinesForm({onHandleFormSubmit, onUpdate}) {
         initialValues: {
             name: '',
             price: '',
+            img: '',
             date: '',
             description: '',
         },
@@ -108,6 +110,19 @@ function MedicinesForm({onHandleFormSubmit, onUpdate}) {
                         onBlur={handleBlur}
                     />
                     {errors.date && touched.date ? <span className='error'>*{errors.date}</span> : null}
+                    <TextField
+                        margin="dense"
+                        name='img'
+                        id="name"
+                        type="file"
+                        fullWidth
+                        variant="standard"
+                        value={values.img}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                    {errors.img && touched.img ? <span className='error'>*{errors.img}</span> : null}
+
                     <TextField
                         margin="dense"
                         name='description'

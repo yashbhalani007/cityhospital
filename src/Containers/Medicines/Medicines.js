@@ -28,7 +28,6 @@ function Medicines({ CartIncDec , setfavvalue ,fav }) {
 
     const HandleAddtocart = (event) => {
         event.preventDefault();
-        console.log("yyyyyyyyyyyy");
 
         CartIncDec((prev) => prev + 1)
         
@@ -37,13 +36,11 @@ function Medicines({ CartIncDec , setfavvalue ,fav }) {
     const handlefav = (id) => {
         // event.preventDefault();
         if (fav.includes(id)) {
-            let n = fav.filter((v) => v !== id);
-            setfavvalue(n);
+            let RmvSame = fav.filter((v) => v !== id);
+            setfavvalue(RmvSame);
         } else {
             setfavvalue((prev) => [...prev, id]);
         }
-       
-        
     }
 
     return (
@@ -56,9 +53,9 @@ function Medicines({ CartIncDec , setfavvalue ,fav }) {
 
                             // <Link to={"/Medicine_Details/" + v.id}>
                                 <Card
+                                    image={v.img}
                                     handlefavourite={() => handlefav(v.id)}
                                     fav={fav.includes(v.id) ? true : false}
-                                    favValue={'yy'}
                                     name={v.name}
                                     price={v.price}
                                     btnvalue={'Add to cart'}
