@@ -19,6 +19,7 @@ import { useState } from "react";
 function UserRoutes(props) {
 
     const [cartValue,setCartValue] = useState(0)
+    const [favValue,setfavvalue] = useState([])
 
     return (
         <>
@@ -32,7 +33,7 @@ function UserRoutes(props) {
 
                 <Route path="/Doctors" element={<Doctors />} />
                 <Route path="/About" element={<About />} />
-                <Route path="/Medicines" element={<Medicines CartIncDec={setCartValue}/>} />
+                <Route path="/Medicines" element={<Medicines CartIncDec={setCartValue} setfavvalue={setfavvalue}/>} />
                 <Route path="/Medicine_Details/:id" element={<MedicineData />} />
 
 

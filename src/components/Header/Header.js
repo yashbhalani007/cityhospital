@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-function Header({ cartValue }) {
+function Header({ cartValue , favValue }) {
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -67,7 +67,7 @@ function Header({ cartValue }) {
                           </StyledBadge>
                         </IconButton>
                         <IconButton aria-label="cart" >
-                            <StyledBadge badgeContent={cartValue} color="warning">
+                            <StyledBadge badgeContent={favValue} color="warning">
                                 <FavoriteIcon />
                           </StyledBadge>
                         </IconButton>
