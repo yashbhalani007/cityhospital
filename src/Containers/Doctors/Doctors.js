@@ -1,5 +1,7 @@
 import React from 'react';
 
+const localdata = JSON.parse(localStorage.getItem("doctors"));
+
 function Doctors(props) {
     return (
         <section id="doctors" className="doctors">
@@ -11,23 +13,27 @@ function Doctors(props) {
                         ipsum lacus, ut pharetra arcu sagittis nec. Phasellus a eleifend elit.</p>
                 </div>
                 <div className="row">
-                    <div className="col-lg-6">
-                        <div className="member d-flex align-items-start">
-                            <div className="pic"><img src="../assets/img/doctors/doctors-1.jpg" className="img-doctor" alt /></div>
-                            <div className="member-info">
-                                <h4>Atha Smith</h4>
-                                <span>Chief Medical Officer</span>
-                                <p>Duis sagittis rutrum neque, quis tincidunt arcu pretium ac.</p>
-                                <div className="social">
-                                    <a href><i className="ri-twitter-fill" /></a>
-                                    <a href><i className="ri-facebook-fill" /></a>
-                                    <a href><i className="ri-instagram-fill" /></a>
-                                    <a href> <i className="ri-linkedin-box-fill" /> </a>
+                    {
+                        localdata.map((v) => {
+                            return (
+                                <div className="col-lg-6">
+                                    <div className="member d-flex align-items-start">
+                                        <div className="pic"><img src="../assets/img/doctors/doctors-1.jpg" className="img-doctor" alt /></div>
+                                        <div className="member-info">
+                                            <h4>{v.name}</h4>
+                                            <span>{v.designation}</span>
+                                            <p>{v.description}</p>
+                    
+                                                <a href='#'>{v.fbProfile}</a>
+                                          
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 mt-4 mt-lg-0">
+                            )
+                        })
+                    }
+
+                    {/* <div className="col-lg-6 mt-4 mt-lg-0">
                         <div className="member d-flex align-items-start">
                             <div className="pic"><img src="../assets/img/doctors/doctors-2.jpg" className="img-doctor" alt /></div>
                             <div className="member-info">
@@ -74,7 +80,7 @@ function Doctors(props) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>

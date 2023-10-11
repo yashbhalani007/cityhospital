@@ -31,6 +31,7 @@ function DoctorAdmin(props) {
                         }
                     })
         ,
+        img: yup.string().required("please enter designation"),
         designation: yup.string().required("please enter designation"),
         fbProfile: yup.string()
             .matches(
@@ -44,6 +45,7 @@ function DoctorAdmin(props) {
         initialValues: {
             name: '',
             description: '',
+            img: '',
             designation: '',
             fbProfile: '',
         },
@@ -139,6 +141,7 @@ function DoctorAdmin(props) {
     const columns = [
         { field: 'name', headerName: 'Name', width: 150 },
         { field: 'description', headerName: 'Description', width: 150 },
+        { field: 'img', headerName: 'Image', width: 150 },
         { field: 'designation', headerName: 'Designation', width: 150 },
         { field: 'fbProfile', headerName: 'FbProfile', width: 200 },
 
@@ -200,6 +203,19 @@ function DoctorAdmin(props) {
                                 onBlur={handleBlur}
                             />
                             {errors.description && touched.description ? <span className='error'>*{errors.description}</span> : null}
+                            <TextField
+                                margin="dense"
+                                id="name"
+                                name='img'
+                                label="image"
+                                type="file"
+                                fullWidth
+                                variant="standard"
+                                value={values.img}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />
+                            {errors.img && touched.img ? <span className='error'>*{errors.img}</span> : null}
                             <TextField
                                 margin="dense"
                                 id="name"
