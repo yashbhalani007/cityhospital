@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Card from '../../components/UI/Card/Card';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+
 
 
 
 let localdata = JSON.parse(localStorage.getItem("medicines"));
 
-function Medicines({ CartIncDec , setfavvalue }) {
+function Medicines({ CartIncDec , setfavvalue ,fav }) {
 
     const [mData,setMdata] = useState([])
 
@@ -35,11 +34,16 @@ function Medicines({ CartIncDec , setfavvalue }) {
         
     }
 
-    const handlefav = (event) => {
-        event.preventDefault();
+    const handlefav = (id) => {
+        // event.preventDefault();
+        if (fav.includes(id)) {
+            let n = fav.filter((v) => v !== id);
+            setfavvalue(n);
+        } else {
+            setfavvalue((prev) => [...prev, id]);
+        }
+       
         
-        setfavvalue
-
     }
 
     return (
@@ -50,17 +54,17 @@ function Medicines({ CartIncDec , setfavvalue }) {
                     mData.map((v) => {
                         return (
 
-                            <Link to={"/Medicine_Details/" + v.id}>
+                            // <Link to={"/Medicine_Details/" + v.id}>
                                 <Card
-                                    handlefavourite={handlefav}
+                                    handlefavourite={() => handlefav(v.id)}
+                                    fav={fav.includes(v.id) ? true : false}
                                     favValue={'yy'}
                                     name={v.name}
                                     price={v.price}
                                     btnvalue={'Add to cart'}
                                     btnClick={HandleAddtocart}
-                            
                                 />
-                            </Link>
+                            // </Link>
 
                         )
                     })

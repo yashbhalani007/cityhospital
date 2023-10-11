@@ -23,7 +23,7 @@ function UserRoutes(props) {
 
     return (
         <>
-            <Header cartValue={cartValue}/>
+            <Header cartValue={cartValue} fav={favValue}/>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Review_Details/:id" element={<ReviewData />} />
@@ -33,7 +33,7 @@ function UserRoutes(props) {
 
                 <Route path="/Doctors" element={<Doctors />} />
                 <Route path="/About" element={<About />} />
-                <Route path="/Medicines" element={<Medicines CartIncDec={setCartValue} setfavvalue={setfavvalue}/>} />
+                <Route path="/Medicines" element={<Medicines CartIncDec={setCartValue} setfavvalue={setfavvalue} fav={favValue}/>} />
                 <Route path="/Medicine_Details/:id" element={<MedicineData />} />
 
 
