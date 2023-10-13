@@ -15,6 +15,7 @@ import Medicines from "../Containers/Medicines/Medicines";
 import MedicineData from "../Containers/Medicines/MedicineData";
 import MedicinesAdmin from "../admin/Containers/MedicinesAdmin/MedicinesAdmin";
 import { useState } from "react";
+import Counter from "../Containers/Counter/Counter";
 
 function UserRoutes(props) {
 
@@ -38,6 +39,7 @@ function UserRoutes(props) {
 
 
                 <Route path="/Contact" element={<Contact />} />
+                <Route path="/counter" element={<Counter />} />
 
                 <Route element={<PrivateRoutes />}>
                     <Route path="/Appointment" element={<Appointment />} />
