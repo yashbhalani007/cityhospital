@@ -4,19 +4,20 @@ import { DataGrid } from '@mui/x-data-grid';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import MedicinesForm from './MedicinesForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMedichines } from '../../../redux/action/medichine.action';
 
 
 function MedicinesAdmin({ }) {
 
     const [mData, setmData] = useState([]);
     const [update, setupdate] = useState(false);
+    const medichine = useSelector(state => state.medicines)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        let localdata = JSON.parse(localStorage.getItem("medicines"));
-
-        if (localdata) {
-            setmData(localdata)
-        }
+        dispatch(getMedichines())
     }, []);
 
     const HandleFormSubmit = (data) => {
@@ -66,9 +67,9 @@ function MedicinesAdmin({ }) {
 
     const columns = [
         { field: 'name', headerName: 'Name', width: 130 },
-        { field: 'date', headerName: 'ExpiryDate', width: 130 },
+        { field: 'expiry', headerName: 'ExpiryDate', width: 130 },
         { field: 'price', headerName: 'Price', width: 130 },
-        { field: 'description', headerName: 'Description', width: 130 },
+        { field: 'desc', headerName: 'Description', width: 300 },
 
         {
             field: 'action',
@@ -98,7 +99,7 @@ function MedicinesAdmin({ }) {
 
                         <div style={{ height: 400, width: '100%' }}>
                             <DataGrid
-                                rows={mData}
+                                rows={medichine.medichines}
                                 columns={columns}
                                 initialState={{
                                     pagination: {
