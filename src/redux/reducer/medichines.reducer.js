@@ -1,4 +1,4 @@
-import { GET_MEDICHINES } from "../ActionTypes";
+import { DELETE_MEDICHINES, GET_MEDICHINES } from "../ActionTypes";
 
 const initialState = {
     isLoading: true,
@@ -15,6 +15,11 @@ export const medichineReducer = (state = initialState, action) => {
             return {
                 ...state,
                 medichines: action.payload
+            }
+        case  DELETE_MEDICHINES:
+            return {
+                ...state,
+                medichines: state.medichines.filter((v) => v.id !== action.payload)
             }
         default:
             return state

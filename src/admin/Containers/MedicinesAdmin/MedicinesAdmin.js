@@ -5,7 +5,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import MedicinesForm from './MedicinesForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMedichines } from '../../../redux/action/medichine.action';
+import { deleteMedichines, getMedichines } from '../../../redux/action/medichine.action';
 
 
 function MedicinesAdmin({ }) {
@@ -13,6 +13,7 @@ function MedicinesAdmin({ }) {
     const [mData, setmData] = useState([]);
     const [update, setupdate] = useState(false);
     const medichine = useSelector(state => state.medicines)
+
 
     const dispatch = useDispatch()
 
@@ -52,13 +53,7 @@ function MedicinesAdmin({ }) {
     }
 
     const handleDelete = (id) => {
-        let localdata = JSON.parse(localStorage.getItem("medicines"));
-
-        let fdata = localdata.filter((v) => v.id !== id)
-
-        localStorage.setItem("medicines", JSON.stringify(fdata))
-
-        setmData(fdata)
+        dispatch(deleteMedichines(id))
     }
 
     const handleupdate = (data) => {

@@ -1,5 +1,5 @@
 import { API_URL } from "../../utilits/BaseUrl";
-import { GET_MEDICHINES } from "../ActionTypes";
+import { DELETE_MEDICHINES, GET_MEDICHINES } from "../ActionTypes";
 
 
 export const getMedichines = () => (dispatch) => {
@@ -12,4 +12,18 @@ export const getMedichines = () => (dispatch) => {
     console.log(error);
 }
 
+}
+
+export const deleteMedichines = (id) => (dispatch) => {
+    try {
+        fetch(API_URL + "medicines/" + id, {
+            method: 'DELETE'
+        })
+            .then((response) => response.json())
+            .then(
+                dispatch({ type: DELETE_MEDICHINES, payload: id })
+            )
+    } catch (error) {
+        console.log(error);
+    }
 }
