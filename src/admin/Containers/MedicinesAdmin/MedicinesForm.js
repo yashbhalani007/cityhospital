@@ -9,15 +9,15 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Button } from '@mui/material';
 
-function MedicinesForm({onHandleFormSubmit, onUpdate}) {
+function MedicinesForm({ onHandleFormSubmit, onUpdate }) {
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
-        if(onUpdate) {
+        if (onUpdate) {
             handleClickOpen()
             setValues(onUpdate)
         }
-    },[onUpdate])
+    }, [onUpdate])
 
     let d = new Date();
     let nd = new Date();
@@ -26,18 +26,16 @@ function MedicinesForm({onHandleFormSubmit, onUpdate}) {
     let MedicineSchema = yup.object().shape({
         name: yup.string().required("please enter name"),
         price: yup.number().required("please enter Price"),
-        img: yup.mixed().required("please enter image"),
-        date: yup.date().required("please enter date").min(nd, "Please choose future date"),
-        description: yup.string().required("please enter message").min(2).max(100)
+        expiry: yup.date().required("please enter date").min(nd, "Please choose future date"),
+        desc: yup.string().required("please enter message").min(2).max(100)
     });
 
     const formik = useFormik({
         initialValues: {
             name: '',
             price: '',
-            img: '',
-            date: '',
-            description: '',
+            expiry: '',
+            desc: '',
         },
 
         validationSchema: MedicineSchema,
@@ -100,7 +98,7 @@ function MedicinesForm({onHandleFormSubmit, onUpdate}) {
                     {errors.price && touched.price ? <span className='error'>*{errors.price}</span> : null}
                     <TextField
                         margin="dense"
-                        name='date'
+                        name='expiry'
                         id="name"
                         type="date"
                         fullWidth
@@ -109,33 +107,20 @@ function MedicinesForm({onHandleFormSubmit, onUpdate}) {
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
-                    {errors.date && touched.date ? <span className='error'>*{errors.date}</span> : null}
+                    {errors.expiry && touched.expiry ? <span className='error'>*{errors.expiry}</span> : null}
                     <TextField
                         margin="dense"
-                        name='img'
-                        id="name"
-                        type="file"
-                        fullWidth
-                        variant="standard"
-                        value={values.img}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    {errors.img && touched.img ? <span className='error'>*{errors.img}</span> : null}
-
-                    <TextField
-                        margin="dense"
-                        name='description'
+                        name='desc'
                         id="name"
                         label="description"
                         type="name"
                         fullWidth
                         variant="standard"
-                        value={values.description}
+                        value={values.desc}
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
-                    {errors.description && touched.description ? <span className='error'>*{errors.description}</span> : null}
+                    {errors.desc && touched.desc ? <span className='error'>*{errors.desc}</span> : null}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
