@@ -15,10 +15,9 @@ function Card({image, name = '', fav, description = '',  price = '', category = 
         <div className='row'>
 
             <div className="product col-md-2">
-                <div className="image-box">
-                    {/* <div className="images" id="image-1" /> */}
+                {/* <div className="image-box">
                     <img src={image} style={{width: '200px',height:'150px'}}/>
-                </div>
+                </div> */}
                 <div className="text-box">
                     <h2 className="item">{name}</h2>
                     <h3 className="price">${price}</h3>

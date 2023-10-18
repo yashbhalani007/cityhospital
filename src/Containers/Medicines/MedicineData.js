@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { getMedichines } from '../../redux/action/medichine.action';
+import { useDispatch, useSelector } from 'react-redux';
 
-
-let localdata = JSON.parse(localStorage.getItem("medicines"));
 
 function MedicineData(props) {
 
+    const dispatch = useDispatch()
+
+    const usermedichine = useSelector((state) => state.medicines)
+    console.log(usermedichine);
+
+
+    useEffect(() => {
+        dispatch(getMedichines())
+    },[])
+
     const { id } = useParams()
 
-    let fdata = localdata.filter((v) => v.id === parseInt(id))
+    let fdata = usermedichine.medichines.filter((v) => v.id === parseInt(id))
 
     return (
         <section id="testimonials" className="testimonials">

@@ -66,7 +66,6 @@ function DepartmentAdmin(props) {
         <>
             <section id="testimonials" className="testimonials">
                 <div className="container">
-                    <h1>Department</h1>
                     <div>
                         <DepartmentForm onHandleFormSubmit={HandleFormSubmit} onUpdate={update} />
 
