@@ -106,6 +106,7 @@ export default function Layout({children}) {
   let iconItems = [
     {label:"medicines" , icon: <MedicalServicesIcon /> , to:"/admin/medicinesAdmin"},
     {label:"doctors" , icon: <MedicationIcon /> , to:"/admin/DoctorAdmin"},
+    {label:"department" , icon: <BookOnlineIcon /> , to:"/admin/DepartmentAdmin"},
     {label:"Appointment" , icon: <BookOnlineIcon /> , to:"/admin/AppointmentAdmin"}
   ]
 

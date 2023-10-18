@@ -44,10 +44,11 @@
     },
     {
       "name": "aaaaa123",
-      "price": 22,
+      "price": 2225,
       "expiry": "2023-10-27",
       "desc": "xxxxxxxxxxx",
       "id": 9
     }
-  ]
+  ],
+  "department": []
 }
