@@ -1,4 +1,4 @@
-import { ADD_MEDICHINES, DELETE_MEDICHINES, GET_MEDICHINES, LOADING_MEDICHINES, UPDATE_MEDICHINES } from "../ActionTypes";
+import { ADD_MEDICHINES, DELETE_MEDICHINES, ERROR_MEDICHINES, GET_MEDICHINES, LOADING_MEDICHINES, UPDATE_MEDICHINES } from "../ActionTypes";
 
 const initialState = {
     isLoading: false,
@@ -9,6 +9,13 @@ const initialState = {
 export const medichineReducer = (state = initialState, action) => {
 
     switch (action.type) {
+
+        case ERROR_MEDICHINES:
+            return {
+                isLoading: false,
+                medichines: [],
+                error: action.payload
+            }
 
         case LOADING_MEDICHINES:
             return {

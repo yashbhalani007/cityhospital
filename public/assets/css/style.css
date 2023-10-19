@@ -1870,6 +1870,8 @@ section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  height: 560px;
+  align-items: center;
 }
 
 .row {

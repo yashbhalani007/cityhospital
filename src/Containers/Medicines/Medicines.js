@@ -1,33 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../../components/UI/Card/Card';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 import { getMedichines } from '../../redux/action/medichine.action';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
+import { addToCart } from '../../redux/action/cart.action';
 
 
 function Medicines({ CartIncDec, setfavvalue, fav }) {
 
     const dispatch = useDispatch()
 
-    const usermedichine = useSelector((state) => state.medicines)
-    console.log(usermedichine);
+    const m1 = useSelector((state) => state.medicines)
 
+    const cart = useSelector((state) => state.cart)
+    console.log(cart);
 
     useEffect(() => {
         dispatch(getMedichines())
     }, [])
 
 
-    const HandleAddtocart = (event) => {
+    const HandleAddtocart = (event ,id) => {
         event.preventDefault();
 
-        CartIncDec((prev) => prev + 1)
+        dispatch(addToCart(id))
+        // CartIncDec((prev) => prev + 1)
 
     }
 
-    const handlefav = (event , id) => {
+    const handlefav = (event, id) => {
         event.preventDefault();
         if (fav.includes(id)) {
             let RmvSame = fav.filter((v) => v !== id);
@@ -41,23 +46,29 @@ function Medicines({ CartIncDec, setfavvalue, fav }) {
         <section id="testimonials" className="testimonials">
             <div className="container medicine">
                 {
-                    usermedichine.isLoading ? <CircularProgress color="secondary" /> :
-                        usermedichine.medichines.map((v) => {
-                            return (
+                    m1.isLoading ? <CircularProgress color="secondary" /> :
+                        m1.error ? <Stack sx={{ width: '100%' }} spacing={2}>
+                            <Alert severity="error">
+                                <AlertTitle>Error</AlertTitle>
+                                This is an error alert — <strong>{m1.error}</strong>
+                            </Alert>
+                        </Stack> :
+                            m1.medichines.map((v) => {
+                                return (
 
-                                <Link to={"/Medicine_Details/" + v.id}>
-                                    <Card
-                                        handlefavourite={(event) => handlefav(v.id)}
-                                        fav={fav.includes(v.id) ? true : false}
-                                        name={v.name}
-                                        price={v.price}
-                                        btnvalue={'Add to cart'}
-                                        btnClick={HandleAddtocart}
-                                    />
-                                </Link>
+                                    <Link to={"/Medicine_Details/" + v.id}>
+                                        <Card
+                                            handlefavourite={() => handlefav(v.id)}
+                                            fav={fav.includes(v.id) ? true : false}
+                                            name={v.name}
+                                            price={v.price}
+                                            btnvalue={'Add to cart'}
+                                            btnClick={(event) => HandleAddtocart(event,v.id)}
+                                        />
+                                    </Link>
 
-                            )
-                        })
+                                )
+                            })
                 }
 
             </div>
