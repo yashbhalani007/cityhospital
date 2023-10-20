@@ -16,15 +16,17 @@ import MedicineData from "../Containers/Medicines/MedicineData";
 import MedicinesAdmin from "../admin/Containers/MedicinesAdmin/MedicinesAdmin";
 import { useState } from "react";
 import Counter from "../Containers/Counter/Counter";
+import Cart from "../Containers/cart/Cart";
+
 
 function UserRoutes(props) {
 
-    const [cartValue,setCartValue] = useState(0)
-    const [favValue,setfavvalue] = useState([])
+    const [cartValue, setCartValue] = useState(0)
+    const [favValue, setfavvalue] = useState([])
 
     return (
         <>
-            <Header cartValue={cartValue} fav={favValue}/>
+            <Header cartValue={cartValue} fav={favValue} />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Review_Details/:id" element={<ReviewData />} />
@@ -34,7 +36,7 @@ function UserRoutes(props) {
 
                 <Route path="/Doctors" element={<Doctors />} />
                 <Route path="/About" element={<About />} />
-                <Route path="/Medicines" element={<Medicines CartIncDec={setCartValue} setfavvalue={setfavvalue} fav={favValue}/>} />
+                <Route path="/Medicines" element={<Medicines CartIncDec={setCartValue} setfavvalue={setfavvalue} fav={favValue} />} />
                 <Route path="/Medicine_Details/:id" element={<MedicineData />} />
 
 
@@ -46,6 +48,8 @@ function UserRoutes(props) {
                 </Route>
 
                 <Route path="/Auth" element={<Auth />} />
+
+                <Route path="/cart" element={<Cart />} />
             </Routes>
             <Footer />
         </>

@@ -12,9 +12,9 @@ export const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_TO_CART:
 
-            let check = state.cart.some((v) => v.id === action.payload.id)
+            let item = state.cart.some((v) => v.id === action.payload.id)
 
-            if (check) {
+            if (item) {
                 let index = state.cart.findIndex((v) => v.id === action.payload.id)
                 state.cart[index].qty++;
             } else {
@@ -23,7 +23,7 @@ export const cartReducer = (state = initialState, action) => {
 
             return {
                 isLoading: false,
-                cart: action.payload,
+                cart: state.cart,
                 error: null
             }
         default:

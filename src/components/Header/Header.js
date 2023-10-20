@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-function Header({ cartValue , favValue ,fav }) {
+function Header({ cartValue, favValue, fav }) {
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -62,17 +62,20 @@ function Header({ cartValue , favValue ,fav }) {
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </NavLink>
                     <div className='cartBtw'>
-                        <IconButton aria-label="cart" >
-                            <StyledBadge badgeContent={cartValue} color="warning">
-                                <ShoppingCartIcon />
-                          </StyledBadge>
-                        </IconButton>
+                        <Link to='/cart'>
+                            <IconButton aria-label="cart" >
+                                <StyledBadge badgeContent={cartValue} color="warning">
+                                    <ShoppingCartIcon />
+                                </StyledBadge>
+                            </IconButton>
+                        </Link>
+
                         <IconButton aria-label="cart" >
                             <StyledBadge badgeContent={fav.length} color="warning">
-                            {
-                                fav ? <FavoriteIcon /> : <FavoriteBorderIcon />
-                            }
-                          </StyledBadge>
+                                {
+                                    fav ? <FavoriteIcon /> : <FavoriteBorderIcon />
+                                }
+                            </StyledBadge>
                         </IconButton>
                     </div>
 

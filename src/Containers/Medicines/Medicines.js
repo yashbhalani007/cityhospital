@@ -16,8 +16,8 @@ function Medicines({ CartIncDec, setfavvalue, fav }) {
 
     const m1 = useSelector((state) => state.medicines)
 
-    const cart = useSelector((state) => state.cart)
-    console.log(cart);
+    const c1 = useSelector((state) => state.cart)
+    console.log(c1);
 
     useEffect(() => {
         dispatch(getMedichines())
@@ -28,7 +28,7 @@ function Medicines({ CartIncDec, setfavvalue, fav }) {
         event.preventDefault();
 
         dispatch(addToCart(id))
-        // CartIncDec((prev) => prev + 1)
+        CartIncDec((prev) => prev + 1)
 
     }
 
@@ -58,7 +58,7 @@ function Medicines({ CartIncDec, setfavvalue, fav }) {
 
                                     <Link to={"/Medicine_Details/" + v.id}>
                                         <Card
-                                            handlefavourite={() => handlefav(v.id)}
+                                            handlefavourite={(event) => handlefav(event,v.id)}
                                             fav={fav.includes(v.id) ? true : false}
                                             name={v.name}
                                             price={v.price}
