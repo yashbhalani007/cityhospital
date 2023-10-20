@@ -1886,8 +1886,7 @@ section {
 
 .card{
   margin: auto;
-  max-width: 1050px;
-  width: 90%;
+  width: 100%;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 1rem;
   border: transparent;
@@ -1903,7 +1902,7 @@ section {
   padding: 4vh 5vh;
   border-bottom-left-radius: 1rem;
   border-top-left-radius: 1rem;
-  text-align: center;
+
 }
 @media(max-width:767px){
   .cart{
@@ -1941,7 +1940,6 @@ section {
 .main{
   margin: 0;
   padding: 2vh 0;
-  width: 100%;
 }
 .col-2, .col{
   padding: 0 1vh;
@@ -2012,10 +2010,25 @@ input:focus::-webkit-input-placeholder
 
 .counter{
   display: flex;
+  flex-direction: row-reverse;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 } 
+.delete {
+  text-align: center;
+}
+.desc {
+  display: block !important;
+}
+.title {
+  text-align: center;
+}
 
 .form-control-sm {
   width: 100px;
+  text-align: center;
+  font-weight: bold;
 }
 a{
   color: black; 

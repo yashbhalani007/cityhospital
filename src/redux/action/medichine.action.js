@@ -18,7 +18,7 @@ export const getMedichines = () => (dispatch) => {
                 })
                 .then((data) => dispatch({ type: GET_MEDICHINES, payload: data }))
                 .catch((error) => dispatch(errorMedichines(error)))
-        }, 4000)
+        }, 2000)
     }
     catch (error) {
         dispatch(errorMedichines(error))
