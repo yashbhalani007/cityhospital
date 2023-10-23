@@ -12,18 +12,19 @@ function Cart(props) {
     const c1 = useSelector((state) => state.cart)
 
     let cartitems = c1.cart.map((v) => {
+
         let medicinceItems = m1.medichines.find((m) => m.id === v.id);
 
-        let NewData = { ...medicinceItems, ...v };
+        let NewData = { ...medicinceItems, qty: v.qty };
 
 
         return NewData
     })
-
+        console.log(cartitems);
 
     const handleInc = (id) => {
         console.log(id);
-        dispatch((incrementQty(id)))
+        dispatch(incrementQty(id))
     }
 
     const handleDec = (id) => {
@@ -61,8 +62,8 @@ function Cart(props) {
                                                     <button className="btn btn-link px-2" onClick={() => handleInc(c.id)}>
                                                         <i className="fas fa-plus" />
                                                     </button>
-                                                    {/* <input id="form1" name="quantity" type="text" value={c.qty} className="form-control form-control-sm " /> */}
-                                                    <p>{c.qty}</p>
+                                                    <input id="form1" name="quantity" type="text" value={c.qty} className="form-control form-control-sm " />
+                                                    {/* <p>{c.qty}</p> */}
                                                     <button className="btn btn-link px-2" onClick={() => handleDec(c.id)}>
                                                     <i className="fas fa-minus" />
                                                     </button>

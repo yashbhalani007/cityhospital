@@ -9,9 +9,9 @@ export const LOADING_MEDICHINES = "LOADING_MEDICHINES";
 export const ERROR_MEDICHINES = "ERROR_MEDICHINES";
 
 export const ADD_TO_CART = "ADD_TO_CART";
-export const INC_CART = "ADD_TO_CART";
-export const DEC_CART = "ADD_TO_CART";
-export const REMOVE_ITEM = "ADD_TO_CART";
+export const INC_CART = "INC_CART";
+export const DEC_CART = "DEC_CART";
+export const REMOVE_ITEM = "REMOVE_ITEM";
 
 export const GET_DEPARTMENT = "GET_DEPARTMENT";
 export const ADD_DEPARTMENT = "ADD_DEPARTMENT";

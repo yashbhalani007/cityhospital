@@ -32,12 +32,14 @@ export const cartReducer = (state = initialState, action) => {
 
             console.log(index1);
             state.cart[index1].qty++;
-    
+            
+            console.log(state.cart); 
             return {
                 isLoading: false,
                 cart: state.cart,
                 error: null
             }
+            
 
         case DEC_CART:
             let index2 = state.cart.findIndex((v) => v.id === action.payload)
