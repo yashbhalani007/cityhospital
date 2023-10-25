@@ -69,7 +69,9 @@ function Header({ cartValue, favValue, fav }) {
                                 </StyledBadge>
                             </IconButton>
                         </Link>
-
+                        
+                        
+                        <Link to='/favourite'>
                         <IconButton aria-label="cart" >
                             <StyledBadge badgeContent={fav.length} color="warning">
                                 {
@@ -77,6 +79,7 @@ function Header({ cartValue, favValue, fav }) {
                                 }
                             </StyledBadge>
                         </IconButton>
+                        </Link>
                     </div>
 
                 </div>

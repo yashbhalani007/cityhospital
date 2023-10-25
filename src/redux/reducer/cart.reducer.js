@@ -1,4 +1,4 @@
-import { ADD_TO_CART, DEC_CART, INC_CART } from "../ActionTypes";
+import { ADD_TO_CART, DEC_CART, INC_CART, REMOVE_ITEM } from "../ActionTypes";
 
 const initialState = {
     isLoading: false,
@@ -53,6 +53,11 @@ export const cartReducer = (state = initialState, action) => {
                 cart: state.cart,
                 error: null
             }
+
+        case REMOVE_ITEM:
+            let index3 = state.cart.findIndex((v) => v.id === action.payload)   
+            
+            
 
         default:
             return state

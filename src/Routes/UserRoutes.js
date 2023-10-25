@@ -17,6 +17,7 @@ import MedicinesAdmin from "../admin/Containers/MedicinesAdmin/MedicinesAdmin";
 import { useState } from "react";
 import Counter from "../Containers/Counter/Counter";
 import Cart from "../Containers/cart/Cart";
+import Favourite from "../Containers/Favourite/Favourite";
 
 
 function UserRoutes(props) {
@@ -50,6 +51,7 @@ function UserRoutes(props) {
                 <Route path="/Auth" element={<Auth />} />
 
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/favourite" element={<Favourite />} />
             </Routes>
             <Footer />
         </>
