@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDoctors } from '../../redux/action/doctors.action';
 
-const localdata = JSON.parse(localStorage.getItem("doctors"));
+
+
 
 function Doctors(props) {
+
+    const doctor = useSelector((state) => state.doctors)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getDoctors())
+    }, [])
+
     return (
         <section id="doctors" className="doctors">
             <div className="container">
@@ -14,7 +26,7 @@ function Doctors(props) {
                 </div>
                 <div className="row">
                     {
-                        localdata.map((v) => {
+                        doctor.doctors.map((v) => {
                             return (
                                 <div className="col-lg-6">
                                     <div className="member d-flex align-items-start">

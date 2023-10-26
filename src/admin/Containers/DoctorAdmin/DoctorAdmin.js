@@ -11,13 +11,21 @@ import { useFormik } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import { useDispatch, useSelector } from 'react-redux';
+import { addDoctors, deleteDoctors, getDoctors, updateDoctors } from '../../../redux/action/doctors.action';
 
 
 function DoctorAdmin(props) {
 
     const [open, setOpen] = React.useState(false);
-    const [docData, setdocData] = useState([])
     const [update, setupdate] = useState(false)
+    const doctors = useSelector(state => state.doctors)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getDoctors())
+    }, []);
 
     let DoctorSchema = yup.object().shape({
         name: yup.string().required("please enter name").matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
@@ -31,7 +39,6 @@ function DoctorAdmin(props) {
                         }
                     })
         ,
-        img: yup.string().required("please enter designation"),
         designation: yup.string().required("please enter designation"),
         fbProfile: yup.string()
             .matches(
@@ -45,7 +52,6 @@ function DoctorAdmin(props) {
         initialValues: {
             name: '',
             description: '',
-            img: '',
             designation: '',
             fbProfile: '',
         },
@@ -53,11 +59,7 @@ function DoctorAdmin(props) {
         validationSchema: DoctorSchema,
         onSubmit: (values, action) => {
             console.log(values);
-            if (update) {
-                handleUpdateData(values)
-            } else {
-                HandleAddData(values)
-            }
+            HandleAddData(values)
 
             action.resetForm()
             handleClose()
@@ -65,66 +67,33 @@ function DoctorAdmin(props) {
     });
 
     useEffect(() => {
-        let localdata = JSON.parse(localStorage.getItem("doctors"));
-
-        if (localdata) {
-            setdocData(localdata)
+        if (update) {
+            handleClickOpen()
+            setValues(update)
         }
 
-    }, []);
+    }, [update]);
 
     const HandleAddData = (data) => {
 
-        let id = Math.floor(Math.random() * 1000);
-
-        let localdata = JSON.parse(localStorage.getItem("doctors"));
-
-        if (localdata) {
-
-            localdata.push({ id, ...data })
-            localStorage.setItem("doctors", JSON.stringify(localdata))
-            setdocData(localdata)
-
+        if (update) {
+            dispatch(updateDoctors(data))
         } else {
-            localStorage.setItem("doctors", JSON.stringify([{ id, ...data }]))
-            setdocData([{ id, ...data }])
+            dispatch(addDoctors(data))
         }
+        
+        setupdate(false)
     }
 
     const handleDelete = (id) => {
-        let localdata = JSON.parse(localStorage.getItem("doctors"));
-
-        let fdata = localdata.filter((v) => v.id !== id)
-
-        localStorage.setItem("doctors", JSON.stringify(fdata))
-
-        setdocData(fdata)
-    }
-
-    const handleUpdateData = (data) => {
-        console.log(data);
-        let localdata = JSON.parse(localStorage.getItem("doctors"));
-
-        let index = localdata.findIndex((v) => v.id === data.id)
-
-        console.log(index);
-
-        localdata[index] = data;
-
-        localStorage.setItem("doctors", JSON.stringify(localdata))
-
-        setdocData(localdata)
-
-        setupdate(false)
+        dispatch(deleteDoctors(id))
 
     }
 
     const handleupdate = (data) => {
         handleClickOpen()
 
-        setValues(data)
-
-        setupdate(true)
+        setupdate(data)
 
     }
 
@@ -141,7 +110,6 @@ function DoctorAdmin(props) {
     const columns = [
         { field: 'name', headerName: 'Name', width: 150 },
         { field: 'description', headerName: 'Description', width: 150 },
-        { field: 'img', headerName: 'Image', width: 150 },
         { field: 'designation', headerName: 'Designation', width: 150 },
         { field: 'fbProfile', headerName: 'FbProfile', width: 200 },
 
@@ -206,19 +174,6 @@ function DoctorAdmin(props) {
                             <TextField
                                 margin="dense"
                                 id="name"
-                                name='img'
-                                label="image"
-                                type="file"
-                                fullWidth
-                                variant="standard"
-                                value={values.img}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                            {errors.img && touched.img ? <span className='error'>*{errors.img}</span> : null}
-                            <TextField
-                                margin="dense"
-                                id="name"
                                 name='designation'
                                 type="name"
                                 fullWidth
@@ -249,7 +204,7 @@ function DoctorAdmin(props) {
                     </Dialog>
                     <div style={{ height: 400, width: '100%' }}>
                         <DataGrid
-                            rows={docData}
+                            rows={doctors.doctors}
                             columns={columns}
                             initialState={{
                                 pagination: {

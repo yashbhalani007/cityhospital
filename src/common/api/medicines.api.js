@@ -16,3 +16,5 @@ export const putMedicinesData = (data) => {
     return putRequest('medicines/' ,data)
 }
 
+
+

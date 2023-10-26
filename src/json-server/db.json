@@ -48,6 +48,13 @@
       "expiry": "2023-11-01",
       "desc": "daddadadadad",
       "id": 10
+    },
+    {
+      "name": "yash123",
+      "price": 122,
+      "expiry": "2023-11-04",
+      "desc": "sASasaasASAs",
+      "id": 11
     }
   ],
   "department": [
@@ -56,6 +63,29 @@
       "sortdesc": "vcvcxvcvvxv",
       "longDesc": "nbnvbnnnvbnv",
       "id": 2
+    },
+    {
+      "title": "meet",
+      "sortdesc": "asdsadadsdadadsdfff",
+      "longDesc": "dadaddsdsadddsdsads",
+      "id": 3
+    }
+  ],
+  "doctors": [
+    {
+      "name": "SASasas",
+      "description": "vcvcxvcvvxv",
+      "designation": "nbnvbnnnvbnv",
+      "id": 2,
+      "fbProfile": "www.yash@facebook.com"
+    },
+    {
+      "name": "meetpatel",
+      "description": "ms",
+      "img": "",
+      "designation": "heart",
+      "fbProfile": "www.meet.com",
+      "id": 3
     }
   ]
 }
