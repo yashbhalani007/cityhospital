@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
-import { addToCart } from '../../redux/action/cart.action';
+import { addtocart } from '../../redux/slice/cart.slice';
 
 
 function Medicines({ CartIncDec, setfavvalue, fav }) {
@@ -27,7 +27,8 @@ function Medicines({ CartIncDec, setfavvalue, fav }) {
     const HandleAddtocart = (event ,id) => {
         event.preventDefault();
 
-        dispatch(addToCart(id))
+        dispatch(addtocart(id))
+        
         CartIncDec((prev) => prev + 1)
 
     }

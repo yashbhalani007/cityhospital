@@ -26,18 +26,6 @@ export const deleteMedichines = (id) => (dispatch) => {
         deletetMedicinesData(id)
         .then(dispatch({type: DELETE_MEDICHINES,payload: id}))
         .catch((error) => dispatch(errorMedichines(error)))
-        // fetch(API_URL + "medicines/" + id, {
-        //     method: 'DELETE'
-        // })
-        //     .then((response) => {
-        //         if (response.ok) {
-        //             return response.json()
-        //         }
-        //     })
-        //     .then(
-        //         dispatch({ type: DELETE_MEDICHINES, payload: id })
-        //     )
-        //     .catch((error) => dispatch(errorMedichines(error)))
     } catch (error) {
         dispatch(errorMedichines(error))
     }
@@ -49,20 +37,6 @@ export const addMedichines = (data) => (dispatch) => {
         postMedicinesData(data)
             .then((response) => dispatch({ type: ADD_MEDICHINES, payload: response.data }))
             .catch((error) => dispatch(errorMedichines(error)))
-        // fetch(API_URL + "medicines", {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(data),
-        // })
-        //     .then((response) => {
-        //         if (response.ok) {
-        //             return response.json()
-        //         }
-        //     })
-        //     .then((data) => dispatch({ type: ADD_MEDICHINES, payload: data }))
-        //     .catch((error) => dispatch(errorMedichines(error)))
     } catch (error) {
         dispatch(errorMedichines(error))
     }
@@ -73,20 +47,6 @@ export const updateMedichines = (data) => (dispatch) => {
         putMedicinesData(data)
             .then((response) => dispatch({ type: UPDATE_MEDICHINES, payload: response.data }))
             .catch((error) => dispatch(errorMedichines(error)))
-        // fetch(API_URL + "medicines/" + data.id, {
-        //     method: 'PUT',
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(data),
-        // })
-        //     .then((response) => {
-        //         if (response.ok) {
-        //             return response.json()
-        //         }
-        //     })
-        //     .then((data) => dispatch({ type: UPDATE_MEDICHINES, payload: data }))
-        //     .catch((error) => dispatch(errorMedichines(error)))
     } catch (error) {
         dispatch(errorMedichines(error))
     }

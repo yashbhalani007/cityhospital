@@ -54,11 +54,13 @@ export const cartReducer = (state = initialState, action) => {
                 error: null
             }
 
-        case REMOVE_ITEM:
-            let index3 = state.cart.findIndex((v) => v.id === action.payload)   
+        // case REMOVE_ITEM:
+        //     return {
+        //         isLoading: false,
+        //         cart: state.cart.filter((v) => v.id != action.payload),
+        //         error: null
+        //     }  
             
-            
-
         default:
             return state
     }

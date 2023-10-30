@@ -8,15 +8,15 @@ function Cart(props) {
 
     const dispatch = useDispatch()
     const m1 = useSelector((state) => state.medicines)
-
+    console.log(m1);
     const c1 = useSelector((state) => state.cart)
+    console.log(c1);
 
     let cartitems = c1.cart.map((v) => {
 
         let medicinceItems = m1.medichines.find((m) => m.id === v.id);
 
         let NewData = { ...medicinceItems, qty: v.qty };
-
 
         return NewData
     })
@@ -67,13 +67,12 @@ function Cart(props) {
                                                         <i className="fas fa-plus" />
                                                     </button>
                                                     <input id="form1" name="quantity" type="text" value={c.qty} className="form-control form-control-sm " />
-                                                    {/* <p>{c.qty}</p> */}
                                                     <button className="btn btn-link px-2" onClick={() => handleDec(c.id)}>
                                                     <i className="fas fa-minus" />
                                                     </button>
                                                 </div>
                                                 <div className="col delete">
-                                                    {c.price} <span className="close">
+                                                    {c.price * c.qty} <span className="close">
                                                         <button className="btn btn-link px-2" onClick={handleRemove(c.id)}>
                                                             <i class="bi bi-trash"></i>
                                                         </button></span>
@@ -84,14 +83,14 @@ function Cart(props) {
                                 })
                             }
 
-
                             <div className="back-to-shop"><a href="#">←</a><span className="text-muted">Back to shop</span></div>
                         </div>
+                        
                         <div className="col-md-4 summary">
                             <div><h5><b>Summary</b></h5></div>
                             <hr />
                             <div className="row">
-                                <div className="col" style={{ paddingLeft: 0 }}>ITEMS 3</div>
+                                <div className="col" style={{ paddingLeft: 0 }}>{cartitems.name}</div>
                                 <div className="col text-right">€ 132.00</div>
                             </div>
 
