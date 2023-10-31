@@ -27,7 +27,7 @@ function Medicines({ CartIncDec, setfavvalue, fav }) {
     const HandleAddtocart = (event ,id) => {
         event.preventDefault();
 
-        dispatch(addtocart(id))
+        dispatch(addtocart({id: id, qty: 1}))
         
         CartIncDec((prev) => prev + 1)
 

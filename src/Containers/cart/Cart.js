@@ -2,7 +2,7 @@
 import React from 'react';
 import Button from '../../components/UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrementQty, incrementQty, removeItem } from '../../redux/action/cart.action';
+import { decrementQty, incrementQty, removeItem } from '../../redux/slice/cart.slice';
 
 function Cart(props) {
 
@@ -33,6 +33,7 @@ function Cart(props) {
     }
 
     const handleRemove = (id) => {
+        console.log(id);
         dispatch(removeItem(id))
     }
 
@@ -73,7 +74,7 @@ function Cart(props) {
                                                 </div>
                                                 <div className="col delete">
                                                     {c.price * c.qty} <span className="close">
-                                                        <button className="btn btn-link px-2" onClick={handleRemove(c.id)}>
+                                                        <button className="btn btn-link px-2" onClick={() => handleRemove(c.id)}>
                                                             <i class="bi bi-trash"></i>
                                                         </button></span>
                                                 </div>
