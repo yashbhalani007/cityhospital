@@ -40,7 +40,6 @@ function MedicinesForm({ onHandleFormSubmit, onUpdate }) {
 
         validationSchema: MedicineSchema,
         onSubmit: (values, action) => {
-            console.log(values);
             onHandleFormSubmit(values)
 
             action.resetForm()

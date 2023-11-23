@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addMedichines, deleteMedichines, getMedichines, updateMedichines } from '../../../redux/action/medichine.action';
 
 
+
 function MedicinesAdmin({ }) {
 
     const [update, setupdate] = useState(false);

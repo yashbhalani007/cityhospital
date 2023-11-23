@@ -51,6 +51,7 @@ function Header({ cartValue, favValue, fav }) {
                             <li><NavLink className="nav-link scrollto" to={"/Doctors"}>Doctors</NavLink></li>
                             <li><NavLink className="nav-link scrollto" to={"/counter"}>Counter</NavLink></li>
                             <li><NavLink className="nav-link scrollto " to={"/About"}>About</NavLink></li>
+                            <li><NavLink className="nav-link scrollto" to={"/todo"}>Todo</NavLink></li>
                             <li><NavLink className="nav-link scrollto" to={"/Medicines"}>Medicines</NavLink></li>
                             <li><NavLink className="nav-link scrollto" to={"/Contact"}>Contact</NavLink></li>
                         </ul>

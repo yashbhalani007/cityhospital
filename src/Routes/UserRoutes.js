@@ -18,6 +18,8 @@ import { useState } from "react";
 import Counter from "../Containers/Counter/Counter";
 import Cart from "../Containers/cart/Cart";
 import Favourite from "../Containers/Favourite/Favourite";
+import Todo from "../components/Todo/Todo";
+import TodoForm from "../components/Todo/TodoForm";
 
 
 function UserRoutes(props) {
@@ -43,6 +45,9 @@ function UserRoutes(props) {
 
                 <Route path="/Contact" element={<Contact />} />
                 <Route path="/counter" element={<Counter />} />
+
+                <Route path="/todo" element={<Todo />} />
+                <Route path="/todo" element={<TodoForm />} />
 
                 <Route element={<PrivateRoutes />}>
                     <Route path="/Appointment" element={<Appointment />} />
