@@ -3,11 +3,20 @@ import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Button/InputBox/Input';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { signupRequest } from '../../redux/action/auth.action';
 
 function Auth(props) {
 
     const [type, setType] = useState('Login');
     const [forget, setForget] = useState(false);
+    const [formType, setFormType] = useState('signup');
+
+    const dispatch = useDispatch()
+
+    const handleSignup = (data) => {
+        dispatch(signupRequest(data));
+    }
 
     let authObj, initVal;
 
@@ -25,10 +34,10 @@ function Auth(props) {
             name: yup.string().matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field ").required("please enter name"),
             email: yup.string().email("please enter valid email").required("please enter email"),
             Password: yup.string().required(),
-            con_Password: yup.string().required().test('con_Password',"Password dose not match",function(val) {
-                if(val === this.parent.Password) {
+            con_Password: yup.string().required().test('con_Password', "Password dose not match", function (val) {
+                if (val === this.parent.Password) {
                     return true;
-                }else {
+                } else {
                     return false;
                 }
             })
@@ -56,9 +65,14 @@ function Auth(props) {
         initialValues: initVal,
         enableReinitialize: true,
         validationSchema: authSchema,
-        onSubmit: values => {
-            console.log(values);
-        },
+        onSubmit: (values, action) => {
+            if (formType === "login") {
+
+            } else if (formType === "signup") {
+                handleSignup(values);
+            }
+            action.resetForm();
+        }
     });
 
     const { handleBlur, handleChange, handleSubmit, values, errors, touched } = formik
@@ -91,7 +105,7 @@ function Auth(props) {
                                             value={values.name}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            errorText = {errors.name && touched.name ? errors.name : ''}
+                                            errorText={errors.name && touched.name ? errors.name : ''}
                                         />
                                     </div>
                             }
@@ -108,9 +122,9 @@ function Auth(props) {
                                     value={values.email}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    errorText = {errors.email && touched.email ? errors.email : ''}
+                                    errorText={errors.email && touched.email ? errors.email : ''}
                                 />
-                                
+
                             </div>
 
                             {
@@ -126,9 +140,9 @@ function Auth(props) {
                                         value={values.Password}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        errorText = {errors.Password && touched.Password ? errors.Password : ''}
+                                        errorText={errors.Password && touched.Password ? errors.Password : ''}
                                     />
-                        
+
                                 </div> : null
                             }
 
@@ -143,7 +157,7 @@ function Auth(props) {
                                         value={values.con_Password}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        errorText = {errors.con_Password && touched.con_Password ? errors.con_Password : ''}
+                                        errorText={errors.con_Password && touched.con_Password ? errors.con_Password : ''}
                                     />
                                 </div> : null
                             }
