@@ -27,4 +27,12 @@ export const LOADING_DOCTORS= "LOADING_DOCTORS";
 export const ERROR_DOCTORS = "ERROR_DOCTORS";
 
 export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
+export const SIGNUP_RESPONSE = "SIGNUP_RESPONSE";
+export const AUTH_ERROR = "AUTH_ERROR";
+
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const LOGIN_RESPONSE = "LOGIN_RESPONSE";
+
+
+
 

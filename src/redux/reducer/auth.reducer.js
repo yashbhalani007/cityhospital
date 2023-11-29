@@ -1,16 +1,42 @@
-import { SIGNUP_REQUEST } from "../ActionTypes";
+import { AUTH_ERROR, LOGIN_REQUEST, LOGIN_RESPONSE, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionTypes";
 
 
 const initState = {
     loading: false,
-    error: null,
-    user: null
+    user: null,
+    error: null
 }
 
 export const authReducer = (state = initState, action) => {
+    console.log(action.payload);
     switch (action.type) {
         case SIGNUP_REQUEST:
             return state;
+
+        case SIGNUP_RESPONSE:
+            return {
+                loading: false,
+                user: action.payload,
+                error: null
+            }
+
+        case LOGIN_REQUEST:
+            return state;
+            
+        // case LOGIN_RESPONSE:
+        //     return {
+        //         loading: false,
+        //         user: action.payload,
+        //         error: null
+        //     }    
+
+        case AUTH_ERROR:
+            return {
+                loading: false,
+                user: null,
+                error: action.payload
+            }        
+
         default:
             return state
     }

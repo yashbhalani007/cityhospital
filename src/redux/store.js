@@ -14,17 +14,19 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
+const sagaMiddleware = createSagaMiddleware()
+
+const allMiddleware = [thunk, sagaMiddleware]
+
 export const configureStore = () => {
 
-  const sagaMiddleware = createSagaMiddleware()
-
-  const allMiddleware = [thunk, sagaMiddleware]
-
   let store = createStore(persistedReducer, applyMiddleware(...allMiddleware));
-  let persistor = persistStore(store)
-
+  
   sagaMiddleware.run(rootSaga)
 
-  return { store, persistor };
+  return store;
 }
 
+export let store = configureStore()
+
+export let persistor = persistStore(store)

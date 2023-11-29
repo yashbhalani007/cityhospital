@@ -4,7 +4,7 @@ import Input from '../../components/UI/Button/InputBox/Input';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { signupRequest } from '../../redux/action/auth.action';
+import { loginRequest, signupRequest } from '../../redux/action/auth.action';
 
 function Auth(props) {
 
@@ -16,6 +16,10 @@ function Auth(props) {
 
     const handleSignup = (data) => {
         dispatch(signupRequest(data));
+    }
+
+    const handleLogin = (data) => {
+        dispatch(loginRequest(data))
     }
 
     let authObj, initVal;
@@ -67,7 +71,7 @@ function Auth(props) {
         validationSchema: authSchema,
         onSubmit: (values, action) => {
             if (formType === "login") {
-
+                handleLogin(values);
             } else if (formType === "signup") {
                 handleSignup(values);
             }
