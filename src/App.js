@@ -5,23 +5,32 @@ import PrivateRoutes from "./Routes/PrivateRoutes";
 import { Provider } from "react-redux";
 import { persistor, store } from "./redux/store";
 import { PersistGate } from 'redux-persist/integration/react'
+import { SnackbarProvider } from 'notistack';
+import Alert from "./components/Alert/Alert";
 
 
 
 function App() {
   return (
     <>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Routes>
-            <Route path="/*" element={<UserRoutes />} />
-            <Route element={<PrivateRoutes />}>
-              <Route path="/admin/*" element={<AdminRoutes />} />
-            </Route>
-          </Routes>
-        </PersistGate>
-      </Provider>
-
+      <SnackbarProvider
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+      >
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Alert />
+            <Routes>
+              <Route path="/*" element={<UserRoutes />} />
+              <Route element={<PrivateRoutes />}>
+                <Route path="/admin/*" element={<AdminRoutes />} />
+              </Route>
+            </Routes>
+          </PersistGate>
+        </Provider>
+      </SnackbarProvider>
     </>
   );
 }

@@ -2,6 +2,7 @@ import { all, call, put, takeEvery } from 'redux-saga/effects'
 import { loginAPI, signupAPI } from '../../common/api/auth.api'
 import { LOGIN_REQUEST, SIGNUP_REQUEST } from '../ActionTypes'
 import { authError, loginRequest, loginResponse, signupResponse } from '../action/auth.action'
+import { setAlert } from '../slice/alert.slice'
 
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
@@ -9,8 +10,10 @@ function* signupUser(action) {
     try {
         const user = yield call(signupAPI, action.payload)
         yield put(signupResponse( user.user ))
+        yield put(setAlert({ text: user.message, color: 'success'}))
     } catch (e) {
         yield put(authError(e.message))
+        yield put(setAlert({ text: e.message, color: 'error'}))
     }
 }
 
