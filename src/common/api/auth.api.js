@@ -39,7 +39,7 @@ export const signupAPI = (data) => {
 }
 
 export const loginAPI = (data) => {
-
+    console.log(data);
     return new Promise((resovle, reject) => {
         signInWithEmailAndPassword(auth, data.email, data.Password)
             .then((userCredential) => {

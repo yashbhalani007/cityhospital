@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Header({ cartValue, favValue, fav }) {
 
@@ -17,6 +18,14 @@ function Header({ cartValue, favValue, fav }) {
             padding: '0 4px',
         },
     }));
+
+    const auth = useSelector(state => state.auth)
+    const dispatch = useDispatch()
+    console.log(auth); 
+
+    const handleLogout = () => {
+        dispatch()
+    }
 
     return (
         <div className="main-header">
@@ -59,9 +68,19 @@ function Header({ cartValue, favValue, fav }) {
                     </nav>
                     <Link to={"/Appointment"} className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</Link>
-                    <NavLink to={"/Auth"} className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">Login/ Signup</span>
-                    </NavLink>
+
+                    {
+                        auth.user ?
+                            <NavLink to={"/"} className="appointment-btn scrollto" onClick={handleLogout}>
+                                <span className="d-none d-md-inline">Logout</span>
+                            </NavLink> :
+                            <NavLink to={"/Auth"} className="appointment-btn scrollto">
+                                <span className="d-none d-md-inline">Login/ Signup</span>
+                            </NavLink>
+                    }
+
+
+
                     <div className='cartBtw'>
                         <Link to='/cart'>
                             <IconButton aria-label="cart" >
@@ -70,16 +89,16 @@ function Header({ cartValue, favValue, fav }) {
                                 </StyledBadge>
                             </IconButton>
                         </Link>
-                        
-                        
+
+
                         <Link to='/favourite'>
-                        <IconButton aria-label="cart" >
-                            <StyledBadge badgeContent={fav.length} color="warning">
-                                {
-                                    fav ? <FavoriteIcon /> : <FavoriteBorderIcon />
-                                }
-                            </StyledBadge>
-                        </IconButton>
+                            <IconButton aria-label="cart" >
+                                <StyledBadge badgeContent={fav.length} color="warning">
+                                    {
+                                        fav ? <FavoriteIcon /> : <FavoriteBorderIcon />
+                                    }
+                                </StyledBadge>
+                            </IconButton>
                         </Link>
                     </div>
 

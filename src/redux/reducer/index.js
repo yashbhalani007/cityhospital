@@ -5,6 +5,7 @@ import { doctorsReducer } from "./doctors.reducer"
 import counterReducer from "../slice/counter.slice"
 import  cartReducer from "../slice/cart.slice"
 import alertSlice from "../slice/alert.slice"
+import { authReducer } from "./auth.reducer"
 
 
 
@@ -14,5 +15,6 @@ export const rootReducer = combineReducers({
     department: departmentReducer,
     cart: cartReducer,
     doctors: doctorsReducer,
-    alert: alertSlice
+    alert: alertSlice,
+    auth: authReducer
 }) 

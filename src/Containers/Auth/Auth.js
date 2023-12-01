@@ -19,6 +19,7 @@ function Auth(props) {
     }
 
     const handleLogin = (data) => {
+        console.log(data);
         dispatch(loginRequest(data))
     }
 
@@ -70,7 +71,7 @@ function Auth(props) {
         enableReinitialize: true,
         validationSchema: authSchema,
         onSubmit: (values, action) => {
-            if (formType === "login") {
+            if (type === "Login") {
                 handleLogin(values);
             } else if (formType === "signup") {
                 handleSignup(values);

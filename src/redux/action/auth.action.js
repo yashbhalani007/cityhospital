@@ -1,4 +1,4 @@
-import { AUTH_ERROR, LOGIN_REQUEST, LOGIN_RESPONSE, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionTypes"
+import { AUTH_ERROR, LOGIN_REQUEST, LOGIN_RESPONSE, LOGOUT_REQUEST, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionTypes"
 
 
 export const signupRequest = (data) => (dispatch) => {
@@ -15,6 +15,14 @@ export const loginRequest = (data) => (dispatch) => {
 
 export const loginResponse = (data) => (dispatch) => {
     dispatch({ type: LOGIN_RESPONSE, payload: data})
+}
+
+export const logoutRequest = () => (dispatch) => {
+    dispatch({ type: LOGOUT_REQUEST})
+}
+
+export const logoutResponse = () => (dispatch) => {
+    dispatch({ type: LOGIN_RESPONSE})
 }
 
 export const authError = (data) => (dispatch) => {
