@@ -146,22 +146,39 @@ import * as yup from 'yup';
 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+import AppShortcutIcon from '@mui/icons-material/AppShortcut';
+import ListIcon from '@mui/icons-material/List';
+import { useDispatch, useSelector } from 'react-redux';
+import { AddAptData } from '../../redux/slice/appointment.slice';
+import { PrimaryBtw } from '../../components/UI/Button/button.style';
 
 
 function Appointment(props) {
+
+    const dispatch = useDispatch()
+
+    const apt = useSelector(state => state.apt)
+
+    console.log(apt);
 
     let d = new Date();
 
     let nd = new Date();
     nd.setDate(d.getDate() - 1);
-    console.log(nd);
 
     const [value, setValue] = React.useState('one');
 
-    const handleChangee = (event, newValue) => {
+    const handleChangeTab = (event, newValue) => {
         setValue(newValue);
     };
+
+    const handleDelete = (id) => {
+        console.log(id);
+    }
+
+    const handleEdit = (v) => {
+        console.log(v);
+    }
 
 
     let AppoimentSchema = yup.object().shape({
@@ -171,27 +188,9 @@ function Appointment(props) {
         date: yup.date().required("please enter date").min(nd, "Please choose future date"),
         department: yup.string().required("please enter department"),
         // .oneOf(["Department 1","Department 2","Department 3"],"please enter atleast one department"),
-        message: yup.string().required("please enter message")
-            .matches(/^\S+(?: \S+)*$/, "extra space are not allowed")
-            .test("message", "only five word allowed", function (val) {
-                let arr = val.split(" ");
-
-                if (arr.length >= 5) {
-                    return true
-                } else {
-                    return false
-                }
-            }),
+        message: yup.string().required("please enter message"),
 
         precption: yup.mixed().required("please enter file")
-            .test("type", "We only support jpeg and jpg format", function (value) {
-                if (value == 'undefined' || value) {
-                    return value && (value.type === "image/jpg" || value.type === "image/jpeg");
-                }
-                else {
-                    return true
-                }
-            })
 
     });
 
@@ -209,17 +208,19 @@ function Appointment(props) {
         validationSchema: AppoimentSchema,
         onSubmit: values => {
             let arr = values.message.split(" ");
-            console.log(arr);
             let nArr = arr.map((v) => {
                 return v[0].toUpperCase() + v.substring(1)
             })
             console.log(nArr.join(" "));
+
+            dispatch(AddAptData(values))
+            setValue(1)
         },
     });
 
-   
 
-    const { handleBlur, handleChange, handleSubmit, values, errors, touched } = formik
+
+    const { handleBlur, handleChange, handleSubmit, setFieldValue, values, errors, touched } = formik
 
 
     return (
@@ -234,132 +235,154 @@ function Appointment(props) {
                             Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                     </div>
 
-                    <Box sx={{ width: '100%' }}>
-                        <Tabs
-                            value={value}
-                            onChange={handleChangee}
-                            textColor="secondary"
-                            indicatorColor="secondary"
-                            aria-label="secondary tabs example"
-                        >
-                            <Tab value="one" label="Item One" />
-                            <Tab value="two" label="Item Two" />
-                        </Tabs>
+                    <Tabs value={value} onChange={handleChangeTab} aria-label="icon label tabs example">
+                        <Tab icon={<AppShortcutIcon />} label="Book Appointment " />
+                        <Tab icon={<ListIcon />} label="List Appointment" />
+                    </Tabs>
 
-                        {value === "one" ?
-                            <form onSubmit={handleSubmit} method="post" role="form" className="php-email-form">
-                                <div className="row">
-                                    <div className="col-md-4 form-group">
-                                        <input type="text"
-                                            name="name"
-                                            className="form-control"
-                                            id="name"
-                                            placeholder="Your Name"
-                                            value={values.name}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
-                                        {errors.name && touched.name ? <span className='error'>*{errors.name}</span> : null}
-
-                                    </div>
-                                    <div className="col-md-4 form-group mt-3 mt-md-0">
-                                        <input
-                                            type="email"
-                                            className="form-control"
-                                            name="email"
-                                            id="email"
-                                            placeholder="Your Email"
-                                            value={values.email}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
-                                        {errors.email && touched.email ? <span className='error'>*{errors.email}</span> : null}
-
-                                    </div>
-                                    <div className="col-md-4 form-group mt-3 mt-md-0">
-                                        <input
-                                            type="tel"
-                                            className="form-control"
-                                            name="phone"
-                                            id="phone"
-                                            placeholder="Your Phone"
-                                            value={values.phone}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
-                                        {errors.phone && touched.phone ? <span className='error'>*{errors.phone}</span> : null}
-
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-4 form-group mt-3">
-                                        <input
-                                            type="date"
-                                            name="date"
-                                            className="form-control datepicker"
-                                            id="date"
-                                            placeholder="Appointment Date"
-                                            value={values.date}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
-                                        {errors.date && touched.date ? <span className='error'>*{errors.date}</span> : null}
-
-                                    </div>
-                                    <div className="col-md-4 form-group mt-3">
-                                        <select
-                                            name="department"
-                                            id="department"
-                                            className="form-select"
-                                            value={values.department}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        >
-                                            <option value="0">Select Department</option>
-                                            <option value="Department 1">Department 1</option>
-                                            <option value="Department 2">Department 2</option>
-                                            <option value="Department 3">Department 3</option>
-                                        </select>
-                                        {errors.department && touched.department ? <span className='error'>*{errors.department}</span> : null}
-
-                                    </div>
-
-                                    <div className="col-md-4 form-group mt-3">
-                                        <input
-                                            name='precption'
-                                            type='file'
-                                            className="form-select"
-                                            value={values.precption}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
-
-                                        {errors.precption && touched.precption ? <span className='error'>*{errors.precption}</span> : null}
-                                    </div>
-                                </div>
-                                <div className="form-group mt-3">
-                                    <textarea
+                    {value === 0 &&
+                        <form onSubmit={handleSubmit} method="post" role="form" className="php-email-form">
+                            <div className="row">
+                                <div className="col-md-4 form-group">
+                                    <input type="text"
+                                        name="name"
                                         className="form-control"
-                                        name="message"
-                                        rows={5}
-                                        placeholder="Message"
-                                        value={values.message}
+                                        id="name"
+                                        placeholder="Your Name"
+                                        value={values.name}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                     />
-                                    {errors.message && touched.message ? <span className='error'>*{errors.message}</span> : null}
+                                    {errors.name && touched.name ? <span className='error'>*{errors.name}</span> : null}
 
                                 </div>
-                                <div className="mb-3">
-                                    <div className="loading">Loading</div>
-                                    <div className="error-message" />
-                                    <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+                                <div className="col-md-4 form-group mt-3 mt-md-0">
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        name="email"
+                                        id="email"
+                                        placeholder="Your Email"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    {errors.email && touched.email ? <span className='error'>*{errors.email}</span> : null}
+
                                 </div>
-                                <div className="text-center"><button type="submit">Make an Appointment</button></div>
-                            </form> :
+                                <div className="col-md-4 form-group mt-3 mt-md-0">
+                                    <input
+                                        type="tel"
+                                        className="form-control"
+                                        name="phone"
+                                        id="phone"
+                                        placeholder="Your Phone"
+                                        value={values.phone}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    {errors.phone && touched.phone ? <span className='error'>*{errors.phone}</span> : null}
+
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-4 form-group mt-3">
+                                    <input
+                                        type="date"
+                                        name="date"
+                                        className="form-control datepicker"
+                                        id="date"
+                                        placeholder="Appointment Date"
+                                        value={values.date}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    {errors.date && touched.date ? <span className='error'>*{errors.date}</span> : null}
+
+                                </div>
+                                <div className="col-md-4 form-group mt-3">
+                                    <select
+                                        name="department"
+                                        id="department"
+                                        className="form-select"
+                                        value={values.department}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    >
+                                        <option value="0">Select Department</option>
+                                        <option value="Department 1">Department 1</option>
+                                        <option value="Department 2">Department 2</option>
+                                        <option value="Department 3">Department 3</option>
+                                    </select>
+                                    {errors.department && touched.department ? <span className='error'>*{errors.department}</span> : null}
+
+                                </div>
+
+                                <div className="col-md-4 form-group mt-3">
+                                    <input
+                                        name='precption'
+                                        type='file'
+                                        className="form-select"
+                                        onChange={(event) => setFieldValue("precption", event.target.files[0])}
+                                        onBlur={handleBlur}
+                                    />
+
+                                    {errors.precption && touched.precption ? <span className='error'>*{errors.precption}</span> : null}
+                                </div>
+                            </div>
+                            <div className="form-group mt-3">
+                                <textarea
+                                    className="form-control"
+                                    name="message"
+                                    rows={5}
+                                    placeholder="Message"
+                                    value={values.message}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                                {errors.message && touched.message ? <span className='error'>*{errors.message}</span> : null}
+
+                            </div>
+                            <div className="mb-3">
+                                <div className="loading">Loading</div>
+                                <div className="error-message" />
+                                <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+                            </div>
+                            <div className="text-center"><button type="submit">Make an Appointment</button></div>
+                        </form>
+                    }
+
+                    {
+                        value === 1 &&
+
+                        <>
                             <h2>Appointment List</h2>
-                        }
-                    </Box>
+                            <div className='row'>
+                                {
+                                    apt.apt.map((v) => {
+                                        return (
+                                            <>
+                                                <div className='col-md-3'>
+                                                    <img src={v.precption} />
+                                                </div>
+                                                <div className='col-md-3'>
+                                                    <p>{v.name}</p>
+                                                </div>
+                                                <div className='col-md-3'>
+                                                    <p>{v.date}</p>
+                                                </div>
+                                                <div className='col-md-3'>
+                                                    <PrimaryBtw onClick={() => handleDelete(v.id)}>delete</PrimaryBtw>
+                                                    <PrimaryBtw onClick={() => handleEdit(v)}>edit</PrimaryBtw>
+                                                </div>
+                                            </>
+                                        )
+                                    })
+                                }
+
+                            </div>
+                        </>
+                    }
 
                 </div>
             </section>

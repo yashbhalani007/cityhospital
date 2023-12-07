@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, sendEmailVerification , signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification , signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 
 
@@ -61,5 +61,26 @@ export const loginAPI = (data) => {
                 }
             });
     })
+
+}
+
+
+export const forgetAPI = (data) => {
+    console.log(data);
+    try {
+        return new Promise((resovle, reject) => {
+            sendPasswordResetEmail(auth, data.email)
+                .then(() => {
+                    resovle({message: "Password reset link sent to your email id."});
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    reject({errorMessage})
+                });
+        })
+    } catch (error) {
+        console.log(error);
+    }
 
 }

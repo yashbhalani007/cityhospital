@@ -49,9 +49,9 @@ function UserRoutes(props) {
                 <Route path="/todo" element={<Todo />} />
                 <Route path="/todo" element={<TodoForm />} />
 
-                <Route element={<PrivateRoutes />}>
-                    <Route path="/Appointment" element={<Appointment />} />
-                </Route>
+
+                <Route path="/Appointment" element={<Appointment />} />
+
 
                 <Route path="/Auth" element={<Auth />} />
 

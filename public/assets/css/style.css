@@ -1975,7 +1975,7 @@ select{
   background-color: rgb(247, 247, 247);
 }
 input{
-  width: 40px;
+  width: 750px;
   height: 40px;
 }
 input:focus::-webkit-input-placeholder
