@@ -141,7 +141,7 @@
 
 
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as yup from 'yup';
 
 import Tabs from '@mui/material/Tabs';
@@ -149,7 +149,7 @@ import Tab from '@mui/material/Tab';
 import AppShortcutIcon from '@mui/icons-material/AppShortcut';
 import ListIcon from '@mui/icons-material/List';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddAptData } from '../../redux/slice/appointment.slice';
+import { AddAptData, DeleteAptData, EditAptData, GeteAptData } from '../../redux/slice/appointment.slice';
 import { PrimaryBtw } from '../../components/UI/Button/button.style';
 
 
@@ -158,6 +158,10 @@ function Appointment(props) {
     const dispatch = useDispatch()
 
     const apt = useSelector(state => state.apt)
+
+    useEffect(() => {
+        dispatch(GeteAptData())
+    },[])
 
     console.log(apt);
 
@@ -172,12 +176,16 @@ function Appointment(props) {
         setValue(newValue);
     };
 
-    const handleDelete = (id) => {
-        console.log(id);
+    const handleDelete = (data) => {
+        console.log(data);
+        dispatch(DeleteAptData(data))
     }
 
-    const handleEdit = (v) => {
-        console.log(v);
+    const handleEdit = (data) => {
+        console.log(data);
+        dispatch(EditAptData(data))
+        
+        setValue(0)
     }
 
 
@@ -214,6 +222,7 @@ function Appointment(props) {
             console.log(nArr.join(" "));
 
             dispatch(AddAptData(values))
+
             setValue(1)
         },
     });
@@ -372,7 +381,7 @@ function Appointment(props) {
                                                     <p>{v.date}</p>
                                                 </div>
                                                 <div className='col-md-3'>
-                                                    <PrimaryBtw onClick={() => handleDelete(v.id)}>delete</PrimaryBtw>
+                                                    <PrimaryBtw onClick={() => handleDelete(v)}>delete</PrimaryBtw>
                                                     <PrimaryBtw onClick={() => handleEdit(v)}>edit</PrimaryBtw>
                                                 </div>
                                             </>
