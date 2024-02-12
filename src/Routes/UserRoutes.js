@@ -20,6 +20,7 @@ import Cart from "../Containers/cart/Cart";
 import Favourite from "../Containers/Favourite/Favourite";
 import Todo from "../components/Todo/Todo";
 import TodoForm from "../components/Todo/TodoForm";
+import Chat from "../Containers/Chat/Chat";
 
 
 function UserRoutes(props) {
@@ -45,6 +46,7 @@ function UserRoutes(props) {
 
                 <Route path="/Contact" element={<Contact />} />
                 <Route path="/counter" element={<Counter />} />
+                <Route path="/chat" element={<Chat />} />
 
                 <Route path="/todo" element={<Todo />} />
                 <Route path="/todo" element={<TodoForm />} />
